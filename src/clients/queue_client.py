@@ -7,7 +7,7 @@ import random
 
 class AbstractQueueClient(abc.ABC):
     @abc.abstractmethod
-    def pop(self) -> dict:
+    def pop(self) -> dict | None:
         pass
 
 
@@ -25,5 +25,8 @@ class QueueClient(AbstractQueueClient):
         image_data = self._images.pop() if width > 400 else self._images[0]
         return {"width": width, "height": height, "image_data": image_data}
 
-    def pop(self) -> dict:
+    def pop(self) -> dict | None:
+        if len(self._images) == 0:
+            return None
+        
         return self._generate_message()
