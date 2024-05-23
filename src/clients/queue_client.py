@@ -1,7 +1,9 @@
 import abc
+import os
 from pathlib import Path
 import json
 from collections import deque
+
 import random
 
 
@@ -13,7 +15,7 @@ class AbstractQueueClient(abc.ABC):
 
 class QueueClient(AbstractQueueClient):
     def __init__(self) -> None:
-        with open(Path('.').parent / "images.json", "r") as images_file:
+        with open(os.path.join(os.path.dirname(__file__), 'images.json'), "r") as images_file:
             self._images: deque[str] = deque(json.load(images_file))
 
 
