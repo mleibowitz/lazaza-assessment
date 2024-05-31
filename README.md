@@ -24,4 +24,4 @@ Please spend no more than two hours on this project.
 * Image Service: A service to submit the upscaled image to.  A client is provided in src/clients/image_service_client.py.  Instantiating “ImageServiceClient” will create a connection to the image service and calling “post_image()” will submit the image, a status code of 200 indicating a successful submission.  ImageService.post_image() takes in the image as “bytes”. 
 
 
-The processor should utilize these existing services & clients to upscale images as it receives them from the queue.  Please indicate the startup command – a future ticket will add a dockerfile that can create a container that starts the processor.  
+The processor should utilize these existing services & clients to upscale images as it receives them from the queue.  The end result of this ticket is a python file, `main.py`, that when run will continuously receive messages from the queue, perform upscaling, and post them to the image service.  To verify output, we will run `python entrypoint.py` from the project root.
