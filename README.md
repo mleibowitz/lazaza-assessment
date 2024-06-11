@@ -25,3 +25,9 @@ Please spend no more than two hours on this project.
 
 
 The processor should utilize these existing services & clients to upscale images as it receives them from the queue.  The end result of this ticket should be a modification to `entrypoint.py` (and any additional code files you create) that when run will continuously receive messages from the queue, perform upscaling, and post them to the image service.  To verify output, we will run `python entrypoint.py` from the project root.
+
+### Running the processor
+* Run `pip install -r requirements.txt` to install dependencies
+* The url and api key for the image upscaling service need to be configured.
+  * `config.yml` will be used by default. To use another file, use the `--config` parameter
+    * For example, `python entrypoint.py --config config_local.yml`

@@ -43,11 +43,9 @@ class UpscaleClient(AbstractUpscaleClient):
         if response.status_code == 200:
             return UpscalingServiceResponse(**response.json())
 
-        logger.error('Encountered error while upscaling image. {}: {} {}; Request: {},{}'.format(
+        logger.error('Encountered error while upscaling image. {}: {} {}'.format(
             response.status_code,
             response.reason,
-            response.json(),
-            request_body['new_width'],
-            request_body['new_height']))
+            response.json()))
 
         return None
