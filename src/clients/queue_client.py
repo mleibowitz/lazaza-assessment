@@ -3,6 +3,13 @@ import os
 import json
 from collections import deque
 import random
+from pydantic import BaseModel
+
+
+class QueueItem(BaseModel):
+    width: int
+    height: int
+    image_data: str
 
 
 class AbstractQueueClient(abc.ABC):
@@ -22,13 +29,15 @@ class QueueClient(AbstractQueueClient):
         divisible_by_100 = [num for num in range(start, end)]
         return 100 * random.choice(divisible_by_100)
 
-    def _generate_message(self) -> dict:
+    def _generate_message(self) -> QueueItem:
         width = self._random_number_divisible_by_100()
         height = self._random_number_divisible_by_100()
         image_data = self._images.pop() if (width > 400 and height > 400) else self._images[0]
-        return {"width": width, "height": height, "image_data": image_data}
+        return QueueItem(width=width,
+                         height=height,
+                         image_data=image_data)
 
-    def pop(self) -> dict | None:
+    def pop(self) -> QueueItem | None:
         if len(self._images) == 0:
             return None
 
